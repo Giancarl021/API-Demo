@@ -1,0 +1,16 @@
+{
+  "name": "environment",
+  "version": "1.0.0",
+  "main": "up.js",
+  "license": "MIT",
+  "scripts": {
+    "up": "node up.js",
+    "down": "node down.js"
+  },
+  "dependencies": {
+    "@giancarl021/locate": "^0.1.4",
+    "dotenv": "^14.3.2",
+    "knex": "^1.0.1",
+    "pg": "^8.7.1"
+  }
+}
