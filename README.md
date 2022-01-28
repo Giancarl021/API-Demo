@@ -26,6 +26,13 @@ If you want to stop the database you can run the [`down.js`](environment/down.js
 
 > Keep in mind that any data in the database will be lost if you run this script.
 
+In order to do that, run the following commands from the root directory of this repository:
+
+```bash
+cd environment
+npm run down
+```
+
 ### Environment Variables
 
 If you want to change the database credentials, port, or other application settings, you can set environment variables in the following files:
