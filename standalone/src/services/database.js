@@ -5,7 +5,7 @@ const user = process.env.DB_USER || 'postgres';
 const password = process.env.DB_PASSWORD || 'postgres';
 const database = process.env.DB_DATABASE || 'postgres';
 
-module.exports = function () {
+module.exports = function ({ autoConnect = false } = {}) {
     const context = {};
     const pool = new Pool({ user, port, password, database });
 
@@ -21,22 +21,24 @@ module.exports = function () {
     }
 
     async function query(query) {
-        ensureClient();
+        await ensureClient();
 
-        return await context.client.query(query);
+        return (await context.client.query(String(query).trim())).rows;
     }
 
     function prepare(statement) {
-        ensureClient();
-
         return async (...params) => {
-            ensureClient();
-            return await context.client.query(statement, params);
+            await ensureClient();
+            return (await context.client.query(statement, params)).rows;
         };
     }
 
-    function ensureClient() {
-        if (!context.client) throw new Error('Not connected to database');
+    async function ensureClient() {
+        if (!context.client) {
+            if (!autoConnect) throw new Error('Not connected to database');
+            
+            await connect();
+        }
     }
 
     return {
