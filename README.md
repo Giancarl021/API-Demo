@@ -101,7 +101,7 @@ This will start the API on port 3000, or the PORT [environment variable](#enviro
 
 This API is RESTful, you can call the following endpoints:
 
-> These example responses are considering that you have not changed the database initial state and are calling the endpoints in order.
+> These example responses are considering that you have **NOT** changed the database initial state and are calling the endpoints in order.
 
 ##### Query all users
 
@@ -191,7 +191,7 @@ Content-Type: application/json
 Content-Length: 95
 
 {
-    "name": "Master Adminsistrator",
+    "name": "Master Administrator",
     "username": "master-adm",
     "licenseType": 3
 }
@@ -218,3 +218,201 @@ Host: localhost:3000
 204 No Content
 ```
 
+##### Query all licenses
+
+**Request**
+
+```http
+GET /license HTTP/1.1
+Host: localhost:3000
+```
+
+**Expected Response Body**
+
+```json
+[
+    {
+        "id": 1,
+        "name": "Free",
+        "price": 0
+    },
+    {
+        "id": 2,
+        "name": "Basic",
+        "price": 9.99
+    },
+    {
+        "id": 3,
+        "name": "Pro",
+        "price": 19.99
+    }
+]
+```
+
+### Azure Functions
+
+This API is made using [NodeJS](https://nodejs.org/en/) and the [Azure Functions Core Tools](https://www.npmjs.com/package/azure-functions-core-tools) scaffolding. It can be deployed only on Azure and, even though it can be dockerized, it's not as easy as in the [Standalone](#standalone) API.
+
+This API is to show an example of an platform-agnostic backend project in NodeJS.
+
+To run this API, run the following command from the root directory of this repository:
+
+```bash
+cd azure-functions
+npm install
+npm start
+```
+
+This will start the API on port 7071.
+
+#### Endpoints
+
+This API is RESTful, you can call the following endpoints:
+
+> These example responses are considering that you have **NOT** changed the database initial state and are calling the endpoints in order.
+
+##### Query all users
+
+**Request**
+
+```http
+GET /api/listUsers HTTP/1.1
+Host: localhost:7071
+```
+
+**Expected Response Body**
+
+```json
+[
+    {
+        "id": 1,
+        "username": "admin",
+        "name": "Administrator",
+        "license": "Pro"
+    },
+    {
+        "id": 2,
+        "username": "the_master_j0hn",
+        "name": "John",
+        "license": "Basic"
+    },
+    {
+        "id": 3,
+        "username": "the_p00r_jane",
+        "name": "Jane",
+        "license": "Free"
+    }
+]
+```
+
+##### Get a user by id
+
+**Request**
+
+```http
+GET /api/getUser?id=1 HTTP/1.1
+Host: localhost:7071
+```
+
+**Expected Response Body**
+
+```json
+{
+    "id": 1,
+    "username": "admin",
+    "name": "Administrator",
+    "license": "Pro"
+}
+```
+
+##### Create a user
+
+**Request**
+
+```http
+POST /api/createUser HTTP/1.1
+Host: localhost:7071
+Content-Type: application/json
+Content-Length: 88
+
+{
+    "name": "Giancarlo Luz",
+    "username": "Giancarl021",
+    "licenseType": 3
+}
+```
+
+**Expected Response Status Code**
+
+```http
+201 Created
+```
+
+##### Update a user
+
+**Request**
+
+```http
+PUT /api/editUser?id=1 HTTP/1.1
+Host: localhost:7071
+Content-Type: application/json
+Content-Length: 95
+
+{
+    "name": "Master Administrator",
+    "username": "master-adm",
+    "licenseType": 3
+}
+```
+
+**Expected Response Status Code**
+
+```http
+204 No Content
+```
+
+##### Delete a user
+
+**Request**
+
+```http
+DELETE /api/deleteUser?id=1 HTTP/1.1
+Host: localhost:7071
+```
+
+**Expected Response Status Code**
+
+```http
+204 No Content
+```
+
+##### Query all licenses
+
+**Request**
+
+```http
+GET /api/listLicenses HTTP/1.1
+Host: localhost:7071
+```
+
+**Expected Response Body**
+
+```json
+[
+    {
+        "id": 1,
+        "name": "Free",
+        "price": 0
+    },
+    {
+        "id": 2,
+        "name": "Basic",
+        "price": 9.99
+    },
+    {
+        "id": 3,
+        "name": "Pro",
+        "price": 19.99
+    }
+]
+```
