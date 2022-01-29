@@ -260,8 +260,6 @@ Host: localhost:3000
 
 This API is made using [NodeJS](https://nodejs.org/en/) and the [Azure Functions Core Tools](https://www.npmjs.com/package/azure-functions-core-tools) scaffolding. It can be deployed only on Azure and, even though it can be dockerized, it's not as easy as in the [Standalone](#standalone) API.
 
-This API is to show an example of an platform-agnostic backend project in NodeJS.
-
 To run this API, run the following command from the root directory of this repository:
 
 ```bash
