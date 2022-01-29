@@ -4,8 +4,10 @@ const Database = require('../common/services/database');
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
+    // Connect with the database
     const database = new Database();
 
+    // Querying all users
     const users = await database.query(`
         SELECT U.id, U.username, U.name, L.name as license FROM "${tables.users}" AS U
             JOIN "${tables.licenses}" AS L
@@ -14,6 +16,7 @@ module.exports = async function (context, req) {
                 U.id ASC
     `);
 
+    // Return all the users
     context.res = {
         body: users,
         headers: {
@@ -21,7 +24,9 @@ module.exports = async function (context, req) {
         }
     };
 
+    // Disconnect with the database
     await database.disconnect();
 
+    // Ends the function execution context
     return context.done();
 }
