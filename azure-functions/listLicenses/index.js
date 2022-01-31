@@ -5,7 +5,7 @@ module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
     // Connect with the database
-    const database = new Database();
+    const database = Database();
 
     // Querying all licenses
     const licenses = await database.query(`

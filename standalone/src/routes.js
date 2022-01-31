@@ -7,7 +7,7 @@ const LicenseController = require('./controllers/license');
 const routes = express.Router();
 
 // Connect with the database
-const database = Database({ autoConnect: true });
+const database = Database();
 
 // Instantiate the controllers
 const userController = UserController({ database });

@@ -46,7 +46,7 @@ module.exports = async function (context, req) {
     }
 
     // Connect with the database
-    const database = new Database();
+    const database = Database();
 
     // Prepared statement for updating a single user
     const editUser = database.prepare(`

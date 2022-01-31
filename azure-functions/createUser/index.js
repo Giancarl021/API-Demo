@@ -24,7 +24,7 @@ module.exports = async function (context, req) {
     }
 
     // Connect with the database
-    const database = new Database();
+    const database = Database();
 
     // Prepared statement for creating a single user
     const createUser = database.prepare(`

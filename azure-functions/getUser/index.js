@@ -27,7 +27,7 @@ module.exports = async function (context, req) {
     }
 
     // Connect with the database
-    const database = new Database();
+    const database = Database();
 
     // Prepared statement for getting a single user by ID
     const getUsersById = database.prepare(`
