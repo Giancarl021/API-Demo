@@ -23,7 +23,7 @@ module.exports = {
 
         if (images.length) return images[0];
 
-        const id = exec(`docker run -d --rm --name ${containerName} -p "${port}:5432" -v "${volumePath}:/var/lib/postgresql/data" -e "POSTGRES_USER=${user}" -e "POSTGRES_PASSWORD=${password}" -e "POSTGRES_DB=${database}" "${containerImage}"`)
+        const id = exec(`docker run -d --rm --name "${containerName}" -p "${port}:5432" -v "${volumePath}:/var/lib/postgresql/data" -e "POSTGRES_USER=${user}" -e "POSTGRES_PASSWORD=${password}" -e "POSTGRES_DB=${database}" "${containerImage}"`)
             .toString('utf8')
             .trim();
 
